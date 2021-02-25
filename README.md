@@ -1,7 +1,4 @@
-```bash
-sudo python3 ripperkit.py
-```
-# Editor.md
+# RipperKIT
 
 ![](https://github.com/CoderDias/RipperKit/raw/main/images/header.PNG)
 
