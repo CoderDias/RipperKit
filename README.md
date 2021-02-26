@@ -26,10 +26,12 @@ colorama
     - [ ] TCP Flooder
     - [ ] SYN Flooder
     - [ ] SMTP Flooder
-- [ ] Crackers
+- [x] Crackers
     - [x] MD5 hash cracker
-    - [ ] SHA1 hash cracker
-    - [ ] SHA256 hash cracker
+    - [x] SHA1 hash cracker
+    - [x] SHA256 hash cracker
+    - [x] SHA512 hash cracker
+    - [ ] Suggestions?
 - [ ] Fuzzers
     - [ ] Suggestions?
 - [ ] Botnet
