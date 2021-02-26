@@ -6,7 +6,7 @@
 
 # Imports
 import sys, requests, time, socket, random, os
-from hashlib import md5, sha1, sha512
+from hashlib import md5, sha1, sha256, sha512
 from itertools import product
 from colorama import init as Colors, Fore, Back, Style
 
@@ -29,9 +29,11 @@ banner += "            Soly (github.com/CoderDias)        \n"
 # Menu index and options
 menu_index = 0
 menu_text = ""
-menu_text += "[1] - Crack MD5 Hash\n"
-menu_text += "[2] - UDP Flooder\n"
+menu_text += "[1] - UDP Flooder\n"
+menu_text += "[2] - Crack MD5 Hash\n"
 menu_text += "[3] - Crack SHA1 Hash\n"
+menu_text += "[4] - Crack SHA256 Hash\n"
+menu_text += "[5] - Crack SHA512 Hash\n"
 menu_text += "[99] - Exit\n"
 
 # Function main
@@ -43,13 +45,19 @@ def main():
 
     while True:
         if(menu_index == "1"):
-            MD5Crack()
+            UDPFlooder()
             break
         elif(menu_index == "2"):
-            UDPFlooder()
+            MD5Crack()
             break
         elif(menu_index == "3"):
             SHA1Crack()
+            break
+        elif(menu_index == "4"):
+            SHA256Crack()
+            break
+        elif(menu_index == "5"):
+            SHA512Crack()
             break
         elif(menu_index == "99"):
             exit()
@@ -131,6 +139,60 @@ def SHA1Crack():
 		for xs in product(alphabet, repeat=n):
 			string=''.join(xs)
 			password = sha1(string.encode('utf-8')).hexdigest()
+            
+			if strhash == password:
+				final = time.time() - starttime
+				print (Fore.LIGHTCYAN_EX + "\nripper@root: [+] Cracked => %s"%(string))
+				print (Fore.LIGHTCYAN_EX + "ripper@root: [+] Duration => %i seconds\n"%(final))
+				reply = input(Fore.GREEN + "Press [ENTER] to return menu.\n\n")
+				main()
+			else:
+				print (Fore.RED + "ripper@root: [-] Fail => %s" % (string))
+
+	final = time.time() - starttime
+	print ("\nripper@root: [+] Duration => %i seconds\n"%(final))
+	main()
+
+# Function crack SHA256
+def SHA256Crack():
+	alphabet = "0123456789abcçdefghijklmnopqrstuvxzywABCÇDEFGHIJKLMNOPQRSTUVXZYW"
+	strhash = input("ripper@root [SHA256 hash to crack]: ")
+	reply = input("ripper@root [Include symbols? (y/n)]: ")
+	if(reply == "y"):
+		alphabet += "!@#$%&*()_-=+';:.,]}{[|^~º?"
+
+	starttime = time.time()
+	for n in range(1, 18 + 1):
+		for xs in product(alphabet, repeat=n):
+			string=''.join(xs)
+			password = sha256(string.encode('utf-8')).hexdigest()
+            
+			if strhash == password:
+				final = time.time() - starttime
+				print (Fore.LIGHTCYAN_EX + "\nripper@root: [+] Cracked => %s"%(string))
+				print (Fore.LIGHTCYAN_EX + "ripper@root: [+] Duration => %i seconds\n"%(final))
+				reply = input(Fore.GREEN + "Press [ENTER] to return menu.\n\n")
+				main()
+			else:
+				print (Fore.RED + "ripper@root: [-] Fail => %s" % (string))
+
+	final = time.time() - starttime
+	print ("\nripper@root: [+] Duration => %i seconds\n"%(final))
+	main()
+
+# Function crack SHA512
+def SHA512Crack():
+	alphabet = "0123456789abcçdefghijklmnopqrstuvxzywABCÇDEFGHIJKLMNOPQRSTUVXZYW"
+	strhash = input("ripper@root [SHA512 hash to crack]: ")
+	reply = input("ripper@root [Include symbols? (y/n)]: ")
+	if(reply == "y"):
+		alphabet += "!@#$%&*()_-=+';:.,]}{[|^~º?"
+
+	starttime = time.time()
+	for n in range(1, 18 + 1):
+		for xs in product(alphabet, repeat=n):
+			string=''.join(xs)
+			password = sha512(string.encode('utf-8')).hexdigest()
             
 			if strhash == password:
 				final = time.time() - starttime
