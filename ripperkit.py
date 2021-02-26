@@ -31,6 +31,7 @@ menu_index = 0
 menu_text = ""
 menu_text += "[1] - Crack MD5 Hash\n"
 menu_text += "[2] - UDP Flooder\n"
+menu_text += "[3] - Crack SHA1 Hash\n"
 menu_text += "[99] - Exit\n"
 
 # Function main
@@ -48,7 +49,7 @@ def main():
             UDPFlooder()
             break
         elif(menu_index == "3"):
-            print("OK")
+            SHA1Crack()
             break
         elif(menu_index == "99"):
             exit()
@@ -108,7 +109,34 @@ def MD5Crack():
 				final = time.time() - starttime
 				print (Fore.LIGHTCYAN_EX + "\nripper@root: [+] Cracked => %s"%(string))
 				print (Fore.LIGHTCYAN_EX + "ripper@root: [+] Duration => %i seconds\n"%(final))
-				reply = input(Fore.GREEN + "Press [ENTER} to return menu.\n\n")
+				reply = input(Fore.GREEN + "Press [ENTER] to return menu.\n\n")
+				main()
+			else:
+				print (Fore.RED + "ripper@root: [-] Fail => %s" % (string))
+
+	final = time.time() - starttime
+	print ("\nripper@root: [+] Duration => %i seconds\n"%(final))
+	main()
+
+# Function crack SHA1
+def SHA1Crack():
+	alphabet = "0123456789abcçdefghijklmnopqrstuvxzywABCÇDEFGHIJKLMNOPQRSTUVXZYW"
+	strhash = input("ripper@root [SHA1 hash to crack]: ")
+	reply = input("ripper@root [Include symbols? (y/n)]: ")
+	if(reply == "y"):
+		alphabet += "!@#$%&*()_-=+';:.,]}{[|^~º?"
+
+	starttime = time.time()
+	for n in range(1, 18 + 1):
+		for xs in product(alphabet, repeat=n):
+			string=''.join(xs)
+			password = sha1(string.encode('utf-8')).hexdigest()
+            
+			if strhash == password:
+				final = time.time() - starttime
+				print (Fore.LIGHTCYAN_EX + "\nripper@root: [+] Cracked => %s"%(string))
+				print (Fore.LIGHTCYAN_EX + "ripper@root: [+] Duration => %i seconds\n"%(final))
+				reply = input(Fore.GREEN + "Press [ENTER] to return menu.\n\n")
 				main()
 			else:
 				print (Fore.RED + "ripper@root: [-] Fail => %s" % (string))
